@@ -5,6 +5,6 @@ class Booking < ApplicationRecord
 
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates_length_of :owner_comment, min: 10
-  validates_length_of :booker_comment, min: 10
+  validates_length_of :owner_comment, minimum: 10
+  validates_length_of :booker_comment, minimum: 10
 end
