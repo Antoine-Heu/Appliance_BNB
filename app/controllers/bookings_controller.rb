@@ -1,17 +1,18 @@
 class BookingsController < ApplicationController
   def new
     @booking = Booking.new
-    @appliance = Appliance.find(params[:id])
+    @appliance = Appliance.find(params[:appliance_id])
   end
 
   def create
     @booking = Booking.new(bookings_params)
-    @appliance = Appliance.find(params[:id])
-    @booking.owner = @booking.appliance.user
+    @appliance = Appliance.find(params[:appliance_id])
+    @booking.owner = @appliance.user
     @booking.appliance = @appliance
     @booking.booker = current_user
+    @booking.status = "Pending"
     if @booking.save
-      redirect_to user_path(current_user)
+      redirect_to root_path, notice: "Booking request sent!"
     end
   end
 
