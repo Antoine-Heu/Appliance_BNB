@@ -1,6 +1,19 @@
 <h1>Pages#home</h1>
 <p><%= render @appliances %></p>
 
+<div class=>
+  <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+    <%= link_to "My profile",
+    my_profile_path(current_user) %>
+  </button>
+</div>
+
+<% if user_signed_in? %>
+      <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
+        <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
+      <% end %>
+<% end %>
+
 <%# belongs_to :booker, class_name: "User", foreign_key: :booker_id
   belongs_to :appliance
   belongs_to :owner, class_name: "User", foreign_key: :owner_id
