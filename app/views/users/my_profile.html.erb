@@ -1,0 +1,8 @@
+
+
+<% if user_signed_in? %>
+      <p>Bienvenue, <%= current_user.username %>!</p>
+      <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
+        <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
+      <% end %>
+<% end %>
