@@ -48,7 +48,9 @@ gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
-gem "sassc-rails"
+gem "sassc-rails", '>= 2.1.0'
+gem 'bootstrap-sass', '~> 3.4.1'
+gem 'datetime_picker_input'
 gem "devise"
 
 group :development, :test do

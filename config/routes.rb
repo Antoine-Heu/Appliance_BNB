@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   get "appliances", to: "appliances#index"
   get "appliances/:id", to: "appliances#show"
+  get "appliances/:id/booking/new", to: "bookings#new", as: "new_booking"
 end

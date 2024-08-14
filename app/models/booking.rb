@@ -5,6 +5,12 @@ class Booking < ApplicationRecord
 
   validates :start_date, presence: true
   validates :end_date, presence: true
+  STATUS = ["Pending", "Accepted", "Declined", "Completed"]
+  validates_inclusions_of :status, in: STATUS
   validates_length_of :owner_comment, minimum: 10
-  validates_length_of :booker_comment, minimum: 10
+  validates_length_of :booker_comment, minimum: 10, if: :pending?
+
+  def pending?
+    status == "Pending"
+  end
 end
