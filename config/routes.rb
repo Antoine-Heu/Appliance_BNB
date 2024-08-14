@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   get "appliances", to: "appliances#index"
   get "appliances/:id", to: "appliances#show"
+
+  get "my_profile", to: "users#my_profile"
 end
