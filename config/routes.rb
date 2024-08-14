@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#home"
 
-  get "appliances", to: "appliances#index"
-  get "appliances/:id", to: "appliances#show"
-
   get "my_profile", to: "users#my_profile"
+
+  resources :appliances, only: %i[show new create] do
+     resources :bookings, only: %i[new create]
+  end
+
 end
