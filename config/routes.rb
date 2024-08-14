@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get "my_profile", to: "users#my_profile"
 
   resources :appliances, only: %i[show new create] do
-     resources :bookings, only: %i[new create]
+    resources :bookings, only: %i[new create]
   end
-
 end
