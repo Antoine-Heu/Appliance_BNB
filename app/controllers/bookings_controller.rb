@@ -1,4 +1,7 @@
 class BookingsController < ApplicationController
+
+  before_action :authenticate_user!, only: %i[new create]
+
   def new
     @booking = Booking.new
     @appliance = Appliance.find(params[:appliance_id])
@@ -13,6 +16,8 @@ class BookingsController < ApplicationController
     @booking.status = "Pending"
     if @booking.save
       redirect_to root_path, notice: "Booking request sent!"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
