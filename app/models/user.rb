@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :appliances
-  has_many :bookings
+  has_many :bookings, through: :appliances
 
   validates :username, presence: true
   validates :address, presence: true
