@@ -8,34 +8,82 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts 'create fake appliances'
+puts 'destroying all users'
+User.destroy_all
+puts 'done destroying all users'
 
-user_one = User.create!(
-  email: "georges2q@wdhqh.com",
-  username: "Georges",
-  address: "truc much",
-  phone: "654684165165",
-  password: "azerty1234"
-)
+puts 'destroying all appliances'
+Appliance.destroy_all
+puts 'done destroying all appliances'
 
-raclette = Appliance.new(
-  name: "Raclette machine",
-  category: "raclette machine",
-  condition: "New",
-  description: "Super produit pour passer votre noël en famille",
-  price: "30€",
-  user_id: user_one.id
+puts 'destroying all bookings'
+Booking.destroy_all
+puts 'done destroying all bookings'
+
+puts 'creating fake users'
+30.times do
+  User.create!(
+    email: Faker::Internet.email,
+    username: Faker::Internet.username,
+    address: Faker::Address.full_address,
+    phone: Faker::PhoneNumber.phone_number,
+    password: "azerty1234"
   )
-raclette.save!
+end
+puts 'done creating fake users'
+puts 'creating fake appliances'
 
-chocolate = Appliance.new(
-  name: "Chocolate machine",
-  category: "fondue pot",
-  condition: "Good",
-  description: "Super produit pour passer votre noël en famille",
-  price: "15€",
-  user_id: user_one.id
-)
-chocolate.save!
+categories = ["Fondue Pot", "Raclette Machine", "Plancha", "Stone Grill", "Crepe Machine", "Barbeque", "Fryer"]
+brands = ["Moulinex", "Tefal", "Seb", "Lagrange", "Bosch", "Philips", "Rowenta", "Electrolux", "Kenwood", "Kitchenaid", "Magimix", "Miele"]
+genres = ["Fondue", "Racletteur", "Plancha", "Stone Grill", "La Crepe Machine", "Le Barbeque", "Le Fryer"]
+versions = ["2000", "Chef", "3000", "Elite", "Excelsior", "Pro", "Master", "Deluxe", "Silver", "Black Edition", "Limited Edition", "Signature Edition"]
+conditions = ["New", "Excellent", "Good", "Used", "Vintage"]
+prices = (30..100).to_a
+users = User.all
 
-puts 'done'
+50.times do
+  appliance = Appliance.new(
+    name: "#{brands.sample} #{genres.sample} #{versions.sample}",
+    category: categories.sample,
+    condition: conditions.sample,
+    description: Faker::Lorem.paragraph_by_chars(number: 128, supplemental: false),
+    price: prices.sample.to_i,
+    user_id: users.sample.id
+    )
+  appliance.save!
+end
+
+puts 'done creating fake appliances'
+puts 'creating fake bookings'
+
+def define_status(start_date, end_date)
+  if end_date < Date.today
+    return "Completed"
+  elsif start_date <= Date.today && end_date >= Date.today
+    return "Ongoing"
+  else
+    return ["Pending", "Upcoming"].sample
+  end
+end
+
+30.times do
+  user = users.sample
+  booker = users.sample
+  appliance = Appliance.all.sample
+  booking = Booking.new(
+    start_date: Faker::Date.between(from: 10.days.ago, to: 1.month.from_now),
+    end_date: Faker::Date.between(from: 8.days.ago, to: 2.month.from_now),
+    booker_comment: Faker::Lorem.paragraph_by_chars(number: 128, supplemental: false),
+    owner_id: user.id,
+    appliance_id: appliance.id,
+    booker_id: booker.id
+  )
+  status = define_status(booking.start_date, booking.end_date)
+  booking[:status] = status
+  if status == "Pending"
+    booking[:owner_comment] = nil
+  else
+    booking[:owner_comment] = Faker::Lorem.paragraph_by_chars(number: 128, supplemental: false)
+  end
+  booking.save!
+end
