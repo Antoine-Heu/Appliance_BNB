@@ -9,26 +9,28 @@
   </div>
 </div>
 <% if user_signed_in? %>
-  <div>
-    <% @user.appliances.each do |appliance| %>
-      <div class="card-product">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-        <div class="card-product-infos">
-          <h2><%= appliance.name %></h2>
-          <h4><%= appliance.category %></h4>
-          <p><%= appliance.description %></p>
-          <p><strong><%= appliance.price %>€</strong></p>
-            <div class="d-flex justify-content-around">
-              <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-                <%= link_to "edit", edit_appliance_path(appliance) %>
-              </button>
-              <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-                <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </button>
-            </div>
+  <div class="container">
+    <h3>My appliances:</h3>
+    <div class="d-flex flex-wrap justify-content-around">
+      <% @user.appliances.each do |appliance| %>
+        <div class="card-product">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+          <div class="card-product-infos">
+            <h2><%= appliance.name %></h2>
+            <h4><%= appliance.category %></h4>
+            <p><strong><%= appliance.price %>€</strong></p>
+              <div class="d-flex justify-content-around">
+                <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                  <%= link_to "edit", edit_appliance_path(appliance) %>
+                </button>
+                <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                  <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </button>
+              </div>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
   <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
     <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
