@@ -33,7 +33,7 @@ end
 puts 'done creating fake users'
 puts 'creating fake appliances'
 
-categories = ["Fondue Pot", "Raclette Machine", "Plancha", "Stone Grill", "Crepe Machine", "Barbeque", "Fryer"]
+categories = ["Fondue pot", "Raclette machine", "Plancha", "Stone Grill", "Crepe Machine", "Barbecue", "Fryer"]
 brands = ["Moulinex", "Tefal", "Seb", "Lagrange", "Bosch", "Philips", "Rowenta", "Electrolux", "Kenwood", "Kitchenaid", "Magimix", "Miele"]
 genres = ["Fondue", "Racletteur", "Plancha", "Stone Grill", "La Crepe Machine", "Le Barbeque", "Le Fryer"]
 versions = ["2000", "Chef", "3000", "Elite", "Excelsior", "Pro", "Master", "Deluxe", "Silver", "Black Edition", "Limited Edition", "Signature Edition"]
