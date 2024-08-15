@@ -1,13 +1,19 @@
 class AppliancesController < ApplicationController
 
+  before_action :authenticate_user!, only: %i[new create]
+
   def show
     @appliance = Appliance.find(params[:id])
   end
 
   def create
-    @appliance = Appliance.create(appliance_params)
+    @appliance = Appliance.new(appliance_params)
     @appliance.user = current_user
-    redirect_to appliance_path(@appliance.id)
+    if @appliance.save
+      redirect_to appliance_path(@appliance)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def new
