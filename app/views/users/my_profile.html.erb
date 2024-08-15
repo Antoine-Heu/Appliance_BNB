@@ -1,20 +1,45 @@
-
+<div class="d-flex justify-content-between">
+  <div>
+    <h2>Bienvenue, <%= current_user.username %>!</h2>
+  </div>
+  <div>
+    <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+      <%= link_to "create appliance", new_appliance_path %>
+    </button>
+  </div>
+</div>
 <% if user_signed_in? %>
-      <p>Bienvenue, <%= current_user.username %>!</p>
-      <div>
-          <% @user.bookings.each do |booking| %>
+  <div>
+    <% @user.appliances.each do |appliance| %>
+      <div class="card-product">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+          <h2><%= appliance.name %></h2>
+          <h4><%= appliance.category %></h4>
+          <p><%= appliance.description %></p>
+          <p><strong><%= appliance.price %>€</strong></p>
             <div>
-              <h2><%= booking.appliance.name %></h2>
-              <h4><%= booking.appliance.type %> - <%= booking.appliance.price %></h4>
-              <p><%= booking.appliance.description %></p>
+              <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                <%= link_to "edit", edit_appliance_path(appliance) %>
+              </button>
             </div>
-          <% end %>
+        </div>
       </div>
-      <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
-        <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
-      <% end %>
+    <% end %>
+  </div>
+  <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
+    <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
+  <% end %>
 <% end %>
 
 <!-- afficher les appliances du user,
 les bookings du user en tant que bokker
 les bookings du user en tant que owner -->
+
+<!-- <% @user.bookings.where(owner_id: current_user.id).each do |booking| %>
+      <div>
+        <h2><%= booking.comm %></h2>
+        <h4><%= booking.appliance.type %> - <%= booking.appliance.price %></h4>
+        <p><%= booking.appliance.description %></p>
+      </div>
+    <% end %> -->

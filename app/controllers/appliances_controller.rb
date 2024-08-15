@@ -16,6 +16,16 @@ class AppliancesController < ApplicationController
     end
   end
 
+  def edit
+    @appliance = Appliance.find(params[:id])
+  end
+
+  def update
+    @appliance = Appliance.find(params[:id])
+    @appliance.update(appliance_params)
+    redirect_to appliance_path(@appliance)
+  end
+
   def new
     @appliance = Appliance.new
   end
