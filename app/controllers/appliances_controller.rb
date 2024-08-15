@@ -26,6 +26,12 @@ class AppliancesController < ApplicationController
     redirect_to appliance_path(@appliance)
   end
 
+  def destroy
+    @appliance = Appliance.find(params[:id])
+    @appliance.destroy
+    redirect_to root_path
+  end
+
   def new
     @appliance = Appliance.new
   end

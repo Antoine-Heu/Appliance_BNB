@@ -18,9 +18,12 @@
           <h4><%= appliance.category %></h4>
           <p><%= appliance.description %></p>
           <p><strong><%= appliance.price %>€</strong></p>
-            <div>
+            <div class="d-flex justify-content-around">
               <button class="m-2 p-2 border rounded-2 bg-dark text-white">
                 <%= link_to "edit", edit_appliance_path(appliance) %>
+              </button>
+              <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
               </button>
             </div>
         </div>
