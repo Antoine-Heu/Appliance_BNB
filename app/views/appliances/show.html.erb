@@ -1,10 +1,26 @@
-<h1><%= @appliance.category %></h1>
+<div class="container my-5" >
+  <div>
+    <div id="product" class="row">
+      <div id="img-bk-price" class="col-5">
+        <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", class: "img-fluid", id: "product-img" %>
+      </div>
 
-<div>
-<h2><%= @appliance.name %></h2>
-<p><%= @appliance.condition %></p>
-<p><%= @appliance.description %></p>
-<p><%= @appliance.price %></p>
+      <div id="appl-info" class="col d-flex flex-column justify-content-between">
+        <h2><%= @appliance.name %></h2>
+        <p><%= @appliance.category %></p>
+        <p><%= @appliance.description %></p>
+        <div id="eat-cond-price" class="d-flex justify-content-between">
+          <div>
+            <p>For <%= @appliance.eaters %> persons</p>
+            <p>Condition : <%= @appliance.condition %></p>
+          </div>
+          <p><%= @appliance.price %> €</p>
+        </div>
+        <div class="col-2 justify-content-start">
+          <%= link_to 'Book it!', new_appliance_booking_path(@appliance), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
-
-<%= link_to 'New Booking', new_appliance_booking_path(@appliance) %>

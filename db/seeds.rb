@@ -46,6 +46,7 @@ users = User.all
     name: "#{brands.sample} #{genres.sample} #{versions.sample}",
     category: categories.sample,
     condition: conditions.sample,
+    eaters: [2, 4, 6, 8, 10, 12].sample,
     description: Faker::Lorem.paragraph_by_chars(number: 128, supplemental: false),
     price: prices.sample.to_i,
     user_id: users.sample.id
