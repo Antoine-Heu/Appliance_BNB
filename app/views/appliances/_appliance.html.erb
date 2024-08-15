@@ -1,6 +1,11 @@
-<%= appliance.name %>
-<%= appliance.category %>
-<%= appliance.price %>
-<%= appliance.eaters %>
-<%= appliance.description %>
-<%= appliance.condition %>
+<%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
+  <div class="card-product">
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+    <div class="card-product-infos">
+      <h2><%= appliance.name %></h2>
+      <h4><%= appliance.category %></h4>
+      <p><%= appliance.description %></p>
+      <p><strong><%= appliance.price %>€</strong></p>
+    </div>
+  </div>
+<% end %>
