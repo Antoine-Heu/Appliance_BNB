@@ -6,7 +6,7 @@ class Appliance < ApplicationRecord
   validates :price, presence: true
   validates_length_of :description, minimum: 10
 
-  CATEGORIES = ["Fondue pot", "Raclette machine", "Plancha", "Stone Grill", "Crepe Machine", "Barbeque", "Fryer"]
+  CATEGORIES = ["Fondue pot", "Raclette machine", "Plancha", "Stone Grill", "Crepe Machine", "Barbecue", "Fryer"]
 
   validates_inclusion_of :category, in: CATEGORIES
   CONDITIONS = ["New", "Excellent", "Good", "Used", "Vintage"]
