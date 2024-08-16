@@ -7,6 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'faker'
+
+image_directory_path = Rails.root.join('lib', 'assets')
+puts image_directory_path
+# Vérifiez que le répertoire d'images existe
+image_files = Dir.entries(image_directory_path).select do |file|
+  # Filter out '.' and '..' and ensure it's a file (not a directory)
+  !File.directory?(File.join(image_directory_path, file))
+end
+# Vérifiez qu'il y a des fichiers d'image dans le répertoire
+unless image_files.any?
+  raise "No image files found in directory: #{image_directory_path}"
+end
 
 puts 'destroying all users'
 User.destroy_all
@@ -41,7 +54,21 @@ conditions = ["New", "Excellent", "Good", "Used", "Vintage"]
 prices = (30..100).to_a
 users = User.all
 
+# images = {
+#   "Fondue pot" => ["../lib/assets/fondu 1.jpg, ../lib/assets/fondu 2.jpg, ../lib/assets/fondu 3.jpg, ../lib/assets/fondu 4.jpg, ../lib/assets/fondu 5.jpg, ../lib/assets/fondu 6.jpg, ../lib/assets/fondu 7.jpg, ../lib/assets/fondu 8.jpg, ../lib/assets/fondu 9.jpg, ../lib/assets/fondu 10.jpg"],
+#   "Raclette machine" => ["../lib/assets/raclette 1.webp", "../lib/assets/raclette 2.webp", "../lib/assets/raclette 3.webp", "../lib/assets/raclette 4.webp", "../lib/assets/raclette 5.webp", "../lib/assets/raclette 6.webp", "../lib/assets/raclette 7.webp", "../lib/assets/raclette 8.webp", "../lib/assets/raclette 9.webp", "../lib/assets/raclette 10.webp"],
+#   "Plancha" => ["../lib/assets/plancha 1.jpg", "../lib/assets/plancha 2.jpg", "../lib/assets/plancha 3.jpg", "../lib/assets/plancha 4.jpg", "../lib/assets/plancha 5.jpg", "../lib/assets/plancha 6.jpg", "../lib/assets/plancha 7.jpg", "../lib/assets/plancha 8.jpg", "../lib/assets/plancha 9.jpg", "../lib/assets/plancha 10.jpg"],
+#   "Stone Grill" => ["../lib/assets/pierrade 1.webp", "../lib/assets/pierrade 2.webp", "../lib/assets/pierrade 3.webp", "../lib/assets/pierrade 4.webp", "../lib/assets/pierrade 5.webp", "../lib/assets/pierrade 6.webp", "../lib/assets/pierrade 7.webp", "../lib/assets/pierrade 8.webp", "../lib/assets/pierrade 9.webp", "../lib/assets/pierrade 10.webp"],
+#   "Crepe Machine" => ["../lib/assets/crepe 1.jpg", "../lib/assets/crepe 2.jpg", "../lib/assets/crepe 3.jpg", "../lib/assets/crepe 4.jpg", "../lib/assets/crepe 5.jpg", "../lib/assets/crepe 6.jpg", "../lib/assets/crepe 7.jpg", "../lib/assets/crepe 8.jpg", "../lib/assets/crepe 9.jpg", "../lib/assets/crepe 10.jpg"],
+#   "Barbecue" => ["../lib/assets/bbq 1.jpg", "../lib/assets/bbq 2.jpg", "../lib/assets/bbq 3.jpg", "../lib/assets/bbq 4.jpg", "../lib/assets/bbq 5.jpg", "../lib/assets/bbq 6.jpg", "../lib/assets/bbq 7.jpg", "../lib/assets/bbq 8.jpg", "../lib/assets/bbq 9.jpg", "../lib/assets/bbq 10.jpg"],
+#   "Fryer" => ["../lib/assets/friteuse 1.jpg", "../lib/assets/friteuse 2.jpg", "../lib/assets/friteuse 3.jpg", "../lib/assets/friteuse 4.jpg", "../lib/assets/friteuse 5.jpg", "../lib/assets/friteuse 6.jpg", "../lib/assets/friteuse 7.jpg", "../lib/assets/friteuse 8.jpg", "../lib/assets/friteuse 9.jpg", "../lib/assets/friteuse 10.jpg"]
+# }
+
 50.times do
+
+  image_file = image_files.sample
+  image_path = File.join(image_directory_path, image_file)
+
   appliance = Appliance.new(
     name: "#{brands.sample} #{genres.sample} #{versions.sample}",
     category: categories.sample,
@@ -51,6 +78,13 @@ users = User.all
     price: prices.sample.to_i,
     user_id: users.sample.id
     )
+
+    appliance.photo.attach(
+      io: File.open(image_path),
+      filename: image_file,
+      content_type: 'image/jpg'
+    )
+
   appliance.save!
 end
 

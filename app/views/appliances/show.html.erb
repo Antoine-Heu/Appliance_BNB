@@ -2,7 +2,7 @@
   <div>
     <div id="product" class="row">
       <div id="img-bk-price" class="col-5">
-        <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", class: "img-fluid", id: "product-img" %>
+        <%= cl_image_tag @appliance.photo.key, class: "img-fluid", id: "product-img" %>
       </div>
 
       <div id="appl-info" class="col d-flex flex-column justify-content-between">
