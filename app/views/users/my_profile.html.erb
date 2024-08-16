@@ -1,13 +1,30 @@
+
 <div class="d-flex justify-content-between">
   <div>
     <h2>Bienvenue, <%= current_user.username %>!</h2>
   </div>
 </div>
 <% if user_signed_in? %>
+
   <div class="container">
-    <h3>My appliances:</h3>
-    <div class="d-flex flex-wrap justify-content-around">
-      <% @user.appliances.each do |appliance| %>
+    <div class="row">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h2>Bienvenue, <%= current_user.username %>!</h2>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <div>
+          <button class="btn btn-custom">
+            <%= link_to "create appliance", new_appliance_path %>
+          </button>
+        </div>
+      </div>
+      <% if user_signed_in? %>
+        <h3>My appliances:</h3>
+          <div class="container my-appliances">
+          <div class="d-flex flex-wrap justify-content-around">
+            <% @user.appliances.each do |appliance| %>
 
         <%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
           <div class="card-product">
@@ -25,20 +42,36 @@
                   </button>
                 </div>
             </div>
-
+            
+                </div>
+                <% end %>
+            <% end %>
           </div>
-          <% end %>
+        </div>
       <% end %>
     </div>
-  </div>
-<% end %>
+    <div class="row">
+      <div id="bookings" class="display-app">
+        <h3>Appliances I booked:</h3>
+        <div class="btn-group mb-3" role="group" aria-label="Booking Status">
+          <% Booking::STATUS.each do |status| %>
+            <%= link_to status, my_profile_path(filter: status), class: "btn btn-primary" %>
+          <% end %>
+        </div>
+            <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+      </div>
 
-<div data-controller="bookings">
-  <h3>Appliances I booked:</h3>
-  <div class="btn-group mb-3" role="group" aria-label="Booking Status">
-    <% Booking::STATUS.each do |status| %>
-      <%= link_to status, my_profile_path(filter: status), class: "btn btn-primary" %>
-    <% end %>
+      <div id="offers" class="display-app">
+        <h3>You received the following offers:</h3>
+        <div class="btn-group mb-3" role="group" aria-label="Offers">
+          <% Booking::STATUS.each do |status| %>
+            <%= link_to status, my_profile_path(selection: status), class: "btn btn-primary" %>
+          <% end %>
+        </div>
+          <%= render partial: "bookings/offer", collection: @received_offers, as: :offer %>
+      </div>
   </div>
+    
   <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+
 </div>

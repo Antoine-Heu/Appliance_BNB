@@ -9,7 +9,7 @@ class AppliancesController < ApplicationController
     @appliance = Appliance.new(appliance_params)
     @appliance.user = current_user
     if @appliance.save
-      redirect_to appliance_path(@appliance)
+      redirect_to my_profile_path
     else
       render :new, status: :unprocessable_entity
     end
