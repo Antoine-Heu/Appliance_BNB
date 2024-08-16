@@ -14,4 +14,25 @@ a {
   justify-content: start;
   align-items: center;
   height: 100vh;
+
+.btn-custom {
+  border-color: #E67E22;
+  color: #E67E22;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.4s;
+}
+
+.btn-custom:hover {
+  background-color: #e67d22;
+  color: white;
+}
+
+.form-custom {
+  border-radius: 5px;
+}
+
+.rounded {
+  border-radius: 10px !important; /* Adjust the value as needed */
 }

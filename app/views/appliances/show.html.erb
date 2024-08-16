@@ -1,23 +1,23 @@
 <div class="container my-5" >
   <div>
-    <div id="product" class="row">
-      <div id="img-bk-price" class="col-5">
-        <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", class: "img-fluid", id: "product-img" %>
+    <div class="row border shadow-sm rounded p-5">
+      <div class="col-5">
+        <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", class: "img-fluid rounded"%>
       </div>
 
-      <div id="appl-info" class="col d-flex flex-column justify-content-between">
-        <h2><%= @appliance.name %></h2>
-        <p><%= @appliance.category %></p>
-        <p><%= @appliance.description %></p>
-        <div id="eat-cond-price" class="d-flex justify-content-between">
-          <div>
+      <div class="col d-flex flex-column">
+        <h2 class="fw-bolder"><%= @appliance.name %></h2>
+        <p class="fw-medium fs-5 mb-5"><%= @appliance.category %></p>
+        <p class="fw-light"><%= @appliance.description %></p>
+
+          <div class="mt-4">
             <p>For <%= @appliance.eaters %> persons</p>
             <p>Condition : <%= @appliance.condition %></p>
           </div>
-          <p><%= @appliance.price %> €</p>
-        </div>
-        <div class="col-2 justify-content-start">
-          <%= link_to 'Book it!', new_appliance_booking_path(@appliance), class: "btn btn-primary" %>
+
+        <div class="d-flex justify-content-between mt-auto">
+          <p class="fw-bolder fs-5"><%= @appliance.price %> €</p>
+          <%= link_to 'Book it!', new_appliance_booking_path(@appliance), class: "btn btn-custom align-self-end" %>
         </div>
       </div>
     </div>
