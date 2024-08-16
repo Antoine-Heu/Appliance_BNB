@@ -1,4 +1,6 @@
+
   <div class="container my-5">
+
     <div class="row">
 
         <div class="d-flex justify-content-between">
@@ -11,11 +13,13 @@
             <h3 class="text-warning">My appliances:</h3>
           <div class="container d-flex flex-wrap">
             <% @user.appliances.each do |appliance| %>
+
               <div class="d-flex flex-column my-4 mx-3 w-25 border shadow-sm rounded py-3">
                 <%= render partial: "appliances/appliance", locals: { appliance: appliance } %>
                 <div class="d-flex justify-content-between mt-auto px-3">
                   <%= link_to "edit", edit_appliance_path(appliance), class: "btn btn-custom" %>
                   <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-custom" %>
+
                 </div>
               </div>
             <% end %>
@@ -50,4 +54,7 @@
         </div>
       </div>
   </div>
+    
+  <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+
 </div>
