@@ -1,7 +1,11 @@
 class PagesController < ApplicationController
 
   def home
-    @appliances = Appliance.all
+    if params[:filter]
+      @appliances = Appliance.where(category: params[:filter])
+    else
+      @appliances = Appliance.all
+    end
   end
 
 end
