@@ -84,3 +84,5 @@ gem "cloudinary"
 
 gem "pg_search"
 # pg_search used for search functionality
+
+gem "faker"

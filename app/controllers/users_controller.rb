@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def my_profile
     @user = current_user
+    @appliances = current_user.appliances
 
     if params[:filter]
       @proposals = Booking.where(booker_id: current_user.id)
