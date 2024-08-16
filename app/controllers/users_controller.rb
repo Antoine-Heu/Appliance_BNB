@@ -5,14 +5,13 @@ class UsersController < ApplicationController
     @user = current_user
 
     if params[:filter]
-      @bookings = current_user.bookings.where(status: params[:filter])
-      @appliances = @bookings.map(&:appliance)
+      @proposals = Booking.where(booker_id: current_user.id)
+      @sent_proposals = @proposals.where(status: params[:filter])
     end
 
     if params[:selection]
       @offers = Booking.all.where(owner_id: current_user.id)
       @received_offers = @offers.where(status: params[:selection])
-      @offers_appliances = @offers.map(&:appliance)
     end
   end
 end
