@@ -2,11 +2,6 @@
   <div>
     <h2>Bienvenue, <%= current_user.username %>!</h2>
   </div>
-  <div>
-    <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-      <%= link_to "create appliance", new_appliance_path %>
-    </button>
-  </div>
 </div>
 <% if user_signed_in? %>
   <div class="container">
@@ -20,10 +15,10 @@
             <h4><%= appliance.category %></h4>
             <p><strong><%= appliance.price %>€</strong></p>
               <div class="d-flex justify-content-around">
-                <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                <button type="button" class="btn btn-warning rounded-3 btn-sm">
                   <%= link_to "edit", edit_appliance_path(appliance) %>
                 </button>
-                <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                <button type="button" class="btn btn-warning rounded-3 btn-sm">
                   <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
                 </button>
               </div>
@@ -32,9 +27,6 @@
       <% end %>
     </div>
   </div>
-  <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
-    <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
-  <% end %>
 <% end %>
 
 <!-- afficher les appliances du user,

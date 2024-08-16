@@ -4,12 +4,10 @@
 
     <a class="navbar-brand text-warning ms-5 fs-2 fw-medium" href="/">bld</a>
 
-
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-warning " type="submit">Search</button>
-    </form>
-
+    <%= form_with url: root_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.text_field :query, class: "form-control me-2", placeholder: "Search", value: params[:query] %>
+      <%= f.submit "Search", class: "btn btn-outline-warning" %>
+    <% end %>
 
     <div id="navbarNavDropdown">
       <ul class="navbar-nav me-5">
