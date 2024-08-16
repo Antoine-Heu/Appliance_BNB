@@ -1,66 +1,53 @@
-  <div class="container">
+  <div class="container my-5">
     <div class="row">
-      <div class="d-flex justify-content-between">
-        <div>
-          <h2>Bienvenue, <%= current_user.username %>!</h2>
+
+        <div class="d-flex justify-content-between">
+          <h2>Bienvenue <%= current_user.username %> !</h2>
+            <%= link_to "create appliance", new_appliance_path, class: "btn btn-custom" %>
         </div>
-      </div>
-      <div class="d-flex justify-content-between">
-        <div>
-          <button class="btn btn-custom">
-            <%= link_to "create appliance", new_appliance_path %>
-          </button>
-        </div>
-      </div>
+
       <% if user_signed_in? %>
-        <h3>My appliances:</h3>
-          <div class="container my-appliances">
-          <div class="d-flex flex-wrap justify-content-around">
+          <div class="mt-4">
+            <h3 class="text-warning">My appliances:</h3>
+          <div class="container d-flex flex-wrap">
             <% @user.appliances.each do |appliance| %>
-
-              <%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
-                <div class="card-product">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                  <div class="card-product-infos">
-                    <h2><%= appliance.name %></h2>
-                    <h4><%= appliance.category %></h4>
-                    <p><strong><%= appliance.price %>€</strong></p>
-                      <div class="d-flex justify-content-around">
-                        <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-                          <%= link_to "edit", edit_appliance_path(appliance) %>
-                        </button>
-                        <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-                          <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
-                        </button>
-                      </div>
-                  </div>
-
+              <div class="d-flex flex-column my-4 mx-3 w-25 border shadow-sm rounded py-3">
+                <%= render partial: "appliances/appliance", locals: { appliance: appliance } %>
+                <div class="d-flex justify-content-between mt-auto px-3">
+                  <%= link_to "edit", edit_appliance_path(appliance), class: "btn btn-custom" %>
+                  <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-custom" %>
                 </div>
-                <% end %>
+              </div>
             <% end %>
           </div>
-        </div>
+         </div>
       <% end %>
     </div>
-    <div class="row">
-      <div id="bookings" class="display-app">
+
+
+    <div>
+      <div class="mt-4">
         <h3>Appliances I booked:</h3>
-        <div class="btn-group mb-3" role="group" aria-label="Booking Status">
-          <% Booking::STATUS.each do |status| %>
-            <%= link_to status, my_profile_path(filter: status), class: "btn btn-primary" %>
-          <% end %>
-        </div>
-            <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+        <div class="d-flex flex-wrap">
+          <div class="btn-group" role="group" aria-label="Booking Status">
+            <% Booking::STATUS.each do |status| %>
+              <%= link_to status, my_profile_path(filter: status), class: "btn-custom mx-2" %>
+            <% end %>
+          </div>
+              <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+          </div>
       </div>
 
-      <div id="offers" class="display-app">
+      <div class="mt-4">
         <h3>You received the following offers:</h3>
-        <div class="btn-group mb-3" role="group" aria-label="Offers">
+        <div class="d-flex flex-wrap">
+        <div class="btn-group" role="group" aria-label="Offers">
           <% Booking::STATUS.each do |status| %>
-            <%= link_to status, my_profile_path(selection: status), class: "btn btn-primary" %>
+            <%= link_to status, my_profile_path(selection: status), class: "btn-custom mx-2" %>
           <% end %>
         </div>
           <%= render partial: "bookings/offer", collection: @received_offers, as: :offer %>
+        </div>
       </div>
   </div>
 </div>
