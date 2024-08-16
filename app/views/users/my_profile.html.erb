@@ -11,7 +11,7 @@
 
         <%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
           <div class="card-product">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <%= cl_image_tag @appliance.photo.key %>
             <div class="card-product-infos">
               <h2><%= appliance.name %></h2>
               <h4><%= appliance.category %></h4>
