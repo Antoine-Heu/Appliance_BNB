@@ -9,5 +9,10 @@ class UsersController < ApplicationController
       @appliances = @bookings.map(&:appliance)
     end
 
+    if params[:selection]
+      @offers = Booking.all.where(owner_id: current_user.id)
+      @received_offers = @offers.where(status: params[:selection])
+      @offers_appliances = @offers.map(&:appliance)
+    end
   end
 end

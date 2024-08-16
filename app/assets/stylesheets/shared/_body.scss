@@ -9,6 +9,12 @@ a {
   color: black;
 }
 
+.display-app {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+
 .btn-custom {
   border-color: #E67E22;
   color: #E67E22;
