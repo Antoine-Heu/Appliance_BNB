@@ -3,40 +3,52 @@
     <h2>Bienvenue, <%= current_user.username %>!</h2>
   </div>
 </div>
+<div class="d-flex justify-content-between">
+  <div>
+    <h2>Bienvenue, <%= current_user.username %>!</h2>
+  </div>
+  <div>
+    <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+      <%= link_to "create appliance", new_appliance_path %>
+    </button>
+  </div>
+</div>
 <% if user_signed_in? %>
   <div class="container">
     <h3>My appliances:</h3>
     <div class="d-flex flex-wrap justify-content-around">
       <% @user.appliances.each do |appliance| %>
-        <div class="card-product">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-          <div class="card-product-infos">
-            <h2><%= appliance.name %></h2>
-            <h4><%= appliance.category %></h4>
-            <p><strong><%= appliance.price %>€</strong></p>
-              <div class="d-flex justify-content-around">
-                <button type="button" class="btn btn-warning rounded-3 btn-sm">
-                  <%= link_to "edit", edit_appliance_path(appliance) %>
-                </button>
-                <button type="button" class="btn btn-warning rounded-3 btn-sm">
-                  <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
-                </button>
-              </div>
+
+        <%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
+          <div class="card-product">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <div class="card-product-infos">
+              <h2><%= appliance.name %></h2>
+              <h4><%= appliance.category %></h4>
+              <p><strong><%= appliance.price %>€</strong></p>
+                <div class="d-flex justify-content-around">
+                  <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                    <%= link_to "edit", edit_appliance_path(appliance) %>
+                  </button>
+                  <button class="m-2 p-2 border rounded-2 bg-dark text-white">
+                    <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </button>
+                </div>
+            </div>
+
           </div>
-        </div>
+          <% end %>
       <% end %>
     </div>
   </div>
 <% end %>
 
-<!-- afficher les appliances du user,
-les bookings du user en tant que bokker
-les bookings du user en tant que owner -->
-
-<!-- <% @user.bookings.where(owner_id: current_user.id).each do |booking| %>
-      <div>
-        <h2><%= booking.comm %></h2>
-        <h4><%= booking.appliance.type %> - <%= booking.appliance.price %></h4>
-        <p><%= booking.appliance.description %></p>
-      </div>
-    <% end %> -->
+<div data-controller="bookings">
+  <h3>Appliances I booked:</h3>
+  <div class="btn-group mb-3" role="group" aria-label="Booking Status">
+    <% Booking::STATUS.each do |status| %>
+      <%= link_to status, my_profile_path(filter: status), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+      <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+</div>
