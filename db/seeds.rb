@@ -21,17 +21,7 @@ unless image_files.any?
   raise "No image files found in directory: #{image_directory_path}"
 end
 
-puts 'destroying all users'
-User.destroy_all
-puts 'done destroying all users'
 
-puts 'destroying all appliances'
-Appliance.destroy_all
-puts 'done destroying all appliances'
-
-puts 'destroying all bookings'
-Booking.destroy_all
-puts 'done destroying all bookings'
 
 puts 'creating fake users'
 30.times do
