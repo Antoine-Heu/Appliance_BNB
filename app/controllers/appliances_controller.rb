@@ -1,5 +1,4 @@
 class AppliancesController < ApplicationController
-
   before_action :authenticate_user!, only: %i[new create]
 
   def show

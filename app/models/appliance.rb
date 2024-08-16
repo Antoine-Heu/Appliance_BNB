@@ -1,4 +1,14 @@
 class Appliance < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search_by_name_description_and_price,
+    against: [:name, :description, :price],
+    associated_against: {
+      user: [:username]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
+
   has_many :bookings
   belongs_to :user
 
