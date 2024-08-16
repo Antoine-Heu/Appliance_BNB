@@ -38,7 +38,7 @@
               <%= link_to status, my_profile_path(filter: status), class: "btn-custom mx-2" %>
             <% end %>
           </div>
-              <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+              <%= render partial: "bookings/user_booking", collection: @sent_proposals, as: :booking %>
           </div>
       </div>
 
