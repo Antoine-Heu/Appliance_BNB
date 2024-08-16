@@ -69,10 +69,13 @@ users = User.all
     user_id: users.sample.id
     )
 
+    extension = File.extname(image_file).delete('.')
+    content_type = "image/#{extension}"
+
     appliance.photo.attach(
       io: File.open(image_path),
       filename: image_file,
-      content_type: 'image/jpg'
+      content_type: content_type
     )
 
   appliance.save!
