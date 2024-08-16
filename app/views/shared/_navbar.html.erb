@@ -5,8 +5,8 @@
     <a class="navbar-brand text-warning ms-5 fs-2 fw-medium" href="/">bld</a>
 
     <%= form_with url: root_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.text_field :query, class: "form-control me-2", placeholder: "Search", value: params[:query] %>
-      <%= f.submit "Search", class: "btn btn-outline-warning" %>
+      <%= f.text_field :query, class: "form-control form-custom me-2", placeholder: "Search", value: params[:query] %>
+      <%= f.submit "Search", class: "btn btn-custom" %>
     <% end %>
 
     <div id="navbarNavDropdown">
