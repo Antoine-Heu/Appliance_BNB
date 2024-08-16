@@ -8,3 +8,10 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.display-app {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 100vh;
+}
