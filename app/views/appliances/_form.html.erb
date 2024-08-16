@@ -5,5 +5,6 @@
   <%= f.input :eaters, input_html: { min: 1 } %>
   <%= f.input :condition, collection: Appliance::CONDITIONS %>
   <%= f.input :price, input_html: { min: 1 } %>
+  <%= f.input :photo, as: :file %>
   <%= f.submit %>
 <% end %>

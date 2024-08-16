@@ -1,3 +1,11 @@
+
+<div class="d-flex justify-content-between">
+  <div>
+    <h2>Bienvenue, <%= current_user.username %>!</h2>
+  </div>
+</div>
+<% if user_signed_in? %>
+
   <div class="container">
     <div class="row">
       <div class="d-flex justify-content-between">
@@ -18,23 +26,23 @@
           <div class="d-flex flex-wrap justify-content-around">
             <% @user.appliances.each do |appliance| %>
 
-              <%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
-                <div class="card-product">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                  <div class="card-product-infos">
-                    <h2><%= appliance.name %></h2>
-                    <h4><%= appliance.category %></h4>
-                    <p><strong><%= appliance.price %>€</strong></p>
-                      <div class="d-flex justify-content-around">
-                        <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-                          <%= link_to "edit", edit_appliance_path(appliance) %>
-                        </button>
-                        <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-                          <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
-                        </button>
-                      </div>
-                  </div>
-
+        <%= link_to appliance_path(appliance), :style=>'text-decoration: none; color: inherit' do %>
+          <div class="card-product">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+            <div class="card-product-infos">
+              <h2><%= appliance.name %></h2>
+              <h4><%= appliance.category %></h4>
+              <p><strong><%= appliance.price %>€</strong></p>
+                <div class="d-flex justify-content-evenly">
+                  <button class="p-2 border rounded-2 bg-warning text-black">
+                    <%= link_to "edit", edit_appliance_path(appliance) %>
+                  </button>
+                  <button class="p-2 border rounded-2 bg-warning text-black">
+                    <%= link_to "delete", appliance_path(appliance), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </button>
+                </div>
+            </div>
+            
                 </div>
                 <% end %>
             <% end %>
@@ -63,4 +71,7 @@
           <%= render partial: "bookings/offer", collection: @received_offers, as: :offer %>
       </div>
   </div>
+    
+  <%= render partial: "bookings/user_booking", collection: @bookings, as: :booking %>
+
 </div>

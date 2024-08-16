@@ -1,4 +1,5 @@
 class Appliance < ApplicationRecord
+  has_one_attached :photo
   include PgSearch::Model
   pg_search_scope :search_by_name_description_and_price,
     against: [:name, :description, :price],
