@@ -81,3 +81,6 @@ end
 
 gem "cloudinary"
 # cloudinary used for hosting assets
+
+gem "pg_search"
+# pg_search used for search functionality

@@ -1,38 +1,33 @@
 
-  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
-  <div class="container">
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 border-bottom">
+  <div class="container py-1">
 
-    <a class="navbar-brand" href="/">bld</a>
+    <a class="navbar-brand text-warning ms-5 fs-2 fw-medium" href="/">bld</a>
 
-
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-
+    <%= form_with url: root_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.text_field :query, class: "form-control me-2", placeholder: "Search", value: params[:query] %>
+      <%= f.submit "Search", class: "btn btn-outline-warning" %>
+    <% end %>
 
     <div id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-5">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Bonhomme
-          </a>
+          <% if user_signed_in? %>
+            <img class="nav-link dropdown-toggle avatar-large" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" src="<%= "https://kitt.lewagon.com/placeholder/users/arthur-littm" %>" />
+          <% else %>
+            <i class="fa-regular fa-user nav-link text-warning fs-5 px-2 border border-warning rounded-circle" data-bs-toggle="dropdown" role="button"></i>
+          <% end %>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Login</a></li>
-            <li><a class="dropdown-item" href="#">Sign-up</a></li>
-            <li><a class="dropdown-item" href="#">Profil</a></li>
-            <li><a class="dropdown-item" href="#">Disconnect</a></li>
+            <% if user_signed_in? %>
+              <li><%= link_to "Profil", my_profile_path, class:"dropdown-item" %></li>
+              <li><%= link_to "Disconnect", destroy_user_session_path, class:"dropdown-item", data: {turbo_method: :delete} %></li>
+            <% else %>
+              <li><%= link_to "Login", new_user_session_path, class:"dropdown-item" %></li>
+              <li><%= link_to "Sign-up", new_user_registration_path, class:"dropdown-item" %></li>
+            <% end %>
           </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
-          <%# <a class="dropdown-item" href="#">Fondue pot</a>
-          <a class="dropdown-item" href="#">Raclette machine</a>
-          <a class="dropdown-item" href="#">Plancha</a>
-          <a class="dropdown-item" href="#">Stone Grill</a>
-          <a class="dropdown-item" href="#">Crepe Machine</a>
-          <a class="dropdown-item" href="#">Barbeque</a>
-          <a class="dropdown-item" href="#">Fryer</a> %>
