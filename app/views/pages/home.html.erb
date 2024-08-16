@@ -1,27 +1,14 @@
 <div class="container">
-  <div class="container d-flex justify-content-around my-3">
+
+  <div class="container d-flex justify-content-around my-4">
     <% Appliance::CATEGORIES.each do |category| %>
-      <a class="text-center text-decoration-none text-warning" href="#"><%= category %></a>
+      <%= link_to category, root_path(filter: category), class: "text-center text-decoration-none text-warning" %>
     <% end %>
   </div>
 
-  <div class="d-flex flex-wrap justify-content-around">
+  <div class="d-flex flex-wrap">
     <%= render @appliances %>
   </div>
-
-  <div class=>
-    <button class="m-2 p-2 border rounded-2 bg-dark text-white">
-      <%= link_to "My profile",
-      my_profile_path(current_user) %>
-    </button>
-  </div>
-
-  <% if user_signed_in? %>
-    <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
-      <%= form.submit 'Déconnexion', class: 'btn btn-danger' %>
-    <% end %>
-  <% end %>
-
 </div>
 
 <%# belongs_to :booker, class_name: "User", foreign_key: :booker_id
